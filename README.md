@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+ТЕСТОВОЕ ЗАДАНИЕ “VIN DECODER” 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Перед нами стоит задача разработки веб-приложения для расшифровки автомобильных VIN-кодов и отображения полученных данных в удобном для восприятия виде. 
 
-## Available Scripts
+Что такое VIN? 
 
-In the project directory, you can run:
+VIN (Vehicle Identification Number) это уникальный код автомобиля, состоящий из 17 символов (латинских букв и цифр). VIN содержит в себе сведения о производителе, модели, годе выпуска и ряде других характеристик автомобиля. 
 
-### `npm start`
+Примеры: 1FTFW1CT5DFC10312, JN1AZ4EH7DM430111. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Расшифровка VIN 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+ Для расшифровки воспользуемся открытым API NHTSA: https://vpic.nhtsa.dot.gov/api/ 
 
-### `npm test`
+Ресурс Decode VIN по запросу /vehicles/decodevin/{vin}?format=json возвращает список переменных, заполненных характеристиками автомобиля. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Ресурс Get Vehicle Variables List по запросу /vehicles/getvehiclevariablelist?format=json возвращает расширенные описания переменных. 
 
-### `npm run build`
+---------------------------------------------
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Разработка приложения 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Для работы с API напишем SPA следующей структуры: 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+/ 
 
-### `npm run eject`
+Форма ввода VIN-кода 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Список из 5 последних расшифрованных кодов 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Список результатов расшифровки (значения Variable и Value переменных из массива Results, у которых Value заполнено) 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+/variables 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Список всех возможных переменных с описаниями 
 
-## Learn More
+/variables/{variableId} 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Описание конкретной переменной 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---------------------------------------------
 
-### Code Splitting
+ТРЕБОВАНИЯ К РЕАЛИЗАЦИИ 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Приложение написано на React. 
 
-### Analyzing the Bundle Size
+Для навигации используется React Router. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Форма ввода поддерживает минимальную валидацию данных (поле не пустое, не больше 17 символов, нет запрещённых символов). 
 
-### Making a Progressive Web App
+Ошибки валидации формы и сообщения из ответа API (поле Message) выводятся в интерфейсе. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Приложение ведёт историю из 5 последних запросов и позволяет применить их для повторного отображения результатов. 
 
-### Advanced Configuration
+Работоспособность в последних версиях Chrome и Firefox. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Можно применять необходимые библиотеки, на своё усмотрение. 
 
-### Deployment
+---------------------------------------------
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+ТРЕБОВАНИЯ К ВЁРСТКЕ 
 
-### `npm run build` fails to minify
+Вёрстка должна быть минималистичной, без фреймворков, но выглядеть корректно на разрешениях от 320 до 1440 px (элементы не должны “слипаться”, “наползать”, или выходить за пределы экрана). Должна соблюдаться семантика элементов. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ТРЕБОВАНИЯ К РАЗМЕЩЕНИЮ 
+
+Исходный (не сжатый) код приложения нужно загрузить в публичный репозиторий на GitHub. В описании репозитория обязательно нужно дать ссылку на развёрнутое приложение. Аккуратный, читаемый исходный код не менее важен, чем работающее демо-приложение. 
