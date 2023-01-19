@@ -163,6 +163,7 @@ h1 {
     transition: var(--transition);
     text-transform: uppercase;
     display: inline-block;
+    margin-bottom: 40px;
   }
   .btn:hover {
     background: var(--primary-700);

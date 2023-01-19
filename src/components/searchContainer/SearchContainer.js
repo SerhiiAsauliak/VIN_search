@@ -1,24 +1,24 @@
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchVinData } from '../../store/search/asyncActions';
 import { selectSearchResults } from '../../store/search/searchSlice';
+import { useForm } from "react-hook-form";
 
 export const SearchContainer = () => {
-  const [inputValue, setInputValue] = useState('')
   const dispatch = useDispatch()
   const {recentRequests} = useSelector(selectSearchResults)
 
-  const onInputChange = (e) => {
-    setInputValue(e.target.value)
-  }
+  const { register, handleSubmit, getValues, setValue, reset, formState: { errors } } = useForm({mode:'onBlur'});
 
-  const handleSubmit =(e) => {
-    e.preventDefault()
-    dispatch(fetchVinData(inputValue))
+  const onSubmit =(e) => {
+    const {search} = getValues()
+    dispatch(fetchVinData(search))
+    reset({
+      search: ''
+    })
   }
 
   const onSetInputValue = (e) => {
-    setInputValue(e.target.innerHTML);
+    setValue('search', e.target.innerHTML);
   }
 
   const requestList = recentRequests.length > 0 && recentRequests.map(item => {
@@ -26,21 +26,31 @@ export const SearchContainer = () => {
   })
   
   return (
-      <form className='form'>
+      <form onSubmit={handleSubmit(onSubmit)} className='form'>
         <h4>Enter VIN code</h4>
         <div className='form-center'>
-          <input
+          <input {...register("search", { 
+              required: "This field is required", 
+              pattern: {
+                value: /\b[(A-H|J-N|P|R-Z|0-9)]{17}\b/gm,
+                message: 'Invalid VIN code'
+              },
+              maxLength: {
+                value: 17,
+                message: 'Max length 17 symbols' 
+              } ,
+              minLength: {
+                value: 17,
+                message: 'Min length 17 symbols' 
+              }})
+            } 
             className='form-input'
             type='text'
-            name='search'
-            value={inputValue}
-            onChange={(e) => onInputChange(e)}
-          >
-          </input>
+          />
+          {errors?.search && <p>{errors.search?.message}</p>}
           <button 
+            type='submit'
             className='btn btn-block'
-            onClick={handleSubmit}
-            disabled={false}
           >
             Get Info
           </button>

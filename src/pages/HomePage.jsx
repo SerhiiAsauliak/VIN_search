@@ -12,7 +12,7 @@ export const HomePage = () => {
   useEffect(() => {
       const requestsFromLocalStorage = getRequestsFromLocalStorage('requests')
       if(requestsFromLocalStorage) {
-        requestsFromLocalStorage.map(el => {
+        requestsFromLocalStorage.reverse().map(el => {
           return dispatch(setRecentRequest(el))
         })
       }
