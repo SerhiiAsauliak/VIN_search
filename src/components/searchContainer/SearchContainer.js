@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchVinData } from '../../store/search/asyncActions';
-import s from './searchContainer.module.css';
 
 export const SearchContainer = () => {
   const [inputValue, setInputValue] = useState('')
@@ -17,19 +16,22 @@ export const SearchContainer = () => {
   }
 
   return (
-      <form className={s.form}>
+      <form className='form'>
         <h4>Enter VIN code</h4>
-        <div className={s.formCenter}>
+        <div className='form-center'>
           <input
-            className={s.formInput}
+            className='form-input'
             type='text'
             name='search'
             value={inputValue}
             onChange={(e) => onInputChange(e)}
           >
           </input>
+          <div>
+            last 5 codes:
+          </div>
           <button 
-            // className={s.btn + s.btnBlock}
+            className='btn btn-block'
             onClick={handleSubmit}
             disabled={false}
           >

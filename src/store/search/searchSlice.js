@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 import { fetchVinData } from './asyncActions'
 
 const initialState = {
-    searchValue: [],
+    searchValue: '',
+    searchResults: [],
     status: 'idle',
 }
 
@@ -14,20 +15,19 @@ const searchSlice = createSlice({
         builder
             .addCase(fetchVinData.pending, (state) => {
                 state.status = 'pending';
-                state.searchValue = [];
+                state.searchResults = [];
             })
             .addCase(fetchVinData.rejected, (state, action) => {
                 state.status = 'rejected';
-                state.searchValue = [];
+                state.searchResults = [];
             })
             .addCase(fetchVinData.fulfilled, (state, action) => {
                 state.status = 'fulfilled';
-                state.searchValue = action.payload;
+                state.searchResults = action.payload;
             })
     },
 })
 
 export const searchReducer = searchSlice.reducer
-export const {setSearchValue} = searchSlice.actions
 
 export const selectSearchValue = (state) => state.searchValue;
