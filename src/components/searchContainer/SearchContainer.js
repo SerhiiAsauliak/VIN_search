@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchVinData } from '../../store/search/asyncActions';
+import { selectSearchResults } from '../../store/search/searchSlice';
 
 export const SearchContainer = () => {
   const [inputValue, setInputValue] = useState('')
   const dispatch = useDispatch()
+  const {recentRequests} = useSelector(selectSearchResults)
 
   const onInputChange = (e) => {
     setInputValue(e.target.value)
@@ -15,6 +17,14 @@ export const SearchContainer = () => {
     dispatch(fetchVinData(inputValue))
   }
 
+  const onSetInputValue = (e) => {
+    setInputValue(e.target.innerHTML);
+  }
+
+  const requestList = recentRequests.length > 0 && recentRequests.map(item => {
+    return <li onClick={(e) => onSetInputValue(e)}>{item}</li>
+  })
+  
   return (
       <form className='form'>
         <h4>Enter VIN code</h4>
@@ -27,9 +37,6 @@ export const SearchContainer = () => {
             onChange={(e) => onInputChange(e)}
           >
           </input>
-          <div>
-            last 5 codes:
-          </div>
           <button 
             className='btn btn-block'
             onClick={handleSubmit}
@@ -37,6 +44,15 @@ export const SearchContainer = () => {
           >
             Get Info
           </button>
+          <div>
+            <h4>
+              Recent requests:
+            </h4>
+              {requestList 
+              ? <ul>{requestList.slice(0, 5)}</ul> 
+              : 'Have no requests yet...'
+              }
+          </div>
         </div>
       </form>
   )

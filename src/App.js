@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/variables" element={<Variables />} />
-        <Route path="/variables/:id" element={<VariableItem/>} />
+        <Route path="/variables/:id" element={<VariableItem />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

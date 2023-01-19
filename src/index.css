@@ -139,6 +139,10 @@ h1 {
     list-style-type: none;
     padding: 0;
   }
+  li {
+    cursor: pointer;
+    width: fit-content;
+  }
   
   .img {
     width: 100%;
