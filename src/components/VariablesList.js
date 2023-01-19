@@ -5,7 +5,7 @@ import arrowRight from "../assets/arrow-right.svg";
 
 
 const VariablesList = () => {
-    const { searchResults, status } = useSelector(selectSearchResults)
+    const { searchResults, status, responseMessage } = useSelector(selectSearchResults)
 
     const list = searchResults.length > 0 && searchResults.map(el => {
         return el.Results.map(value => {
@@ -15,6 +15,9 @@ const VariablesList = () => {
 
     return (
         <div className="container">
+            <div className={responseMessage ? "results-message show" : "results-message"}>    
+                {responseMessage}
+            </div>   
             <div className="results-header">
             {status === 'fulfilled' &&
                 <>

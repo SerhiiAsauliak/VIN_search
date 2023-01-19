@@ -31,7 +31,7 @@ export const Variables = () => {
     <>
       <div>
         <img style={{ marginRight: "8px" }} src={arrowLeft} alt="arrowLeft" />
-        <Link to="/">Back to main</Link>
+        <Link to="/">Back to main page</Link>
       </div>
       <ul>{list}</ul>
     </>

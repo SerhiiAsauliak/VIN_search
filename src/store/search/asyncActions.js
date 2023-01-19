@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { addRequestsToLocalStorage } from '../../components/utils';
-import { ALL_VARIABLE_URL, BASE_URL } from '../../config';
+import { ALL_VARIABLE_URL, BASE_URL, VARIABLE_ITEM_URL } from '../../config';
 import { useHttp } from './../../hooks/useHttp';
 import { setRecentRequest } from './searchSlice';
 
@@ -20,8 +20,16 @@ export const fetchAllVariables = createAsyncThunk(
     '@@articles/fetchAllVariables', 
     async () => {
         const {request} = useHttp()
-        // addRequestsToLocalStorage('requests', search.recentRequests)
         const res = await request(ALL_VARIABLE_URL)
+        return res  
+})
+
+export const fetchVariableItem = createAsyncThunk(
+    '@@articles/fetchVariableItem', 
+    async (value) => {
+        const {request} = useHttp()
+        let url = `${VARIABLE_ITEM_URL}/${value}?format=json`
+        const res = await request(url)
         return res  
 })
 
