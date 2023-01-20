@@ -12,7 +12,11 @@ export const Variables = () => {
   const dispatch = useDispatch();
 
   const getAllVariabls = async () => {
-    dispatch(fetchAllVariables());
+    try {
+      dispatch(fetchAllVariables());
+    } catch (error) {
+      console.log(error);
+    }
   };
   const { allVariables, status } = useSelector(selectSearchResults);
   const list =
@@ -47,7 +51,7 @@ export const Variables = () => {
         img={arrowLeft}
         arrowDirection={"left"}
       />
-      <p>Click to the variable to see all possible values</p>
+      <h4>Click to the variable to see all possible values</h4>
       <ul>{list}</ul>
     </>
   );

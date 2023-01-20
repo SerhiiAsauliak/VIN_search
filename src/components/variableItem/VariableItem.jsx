@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectVariableItem } from "../../store/search/searchSlice";
 import { useEffect } from "react";
@@ -7,6 +7,7 @@ import { fetchVariableItem } from "../../store/search/asyncActions";
 import { selectSearchResults } from "../../store/search/searchSlice";
 import arrowLeft from '../../assets/arrow-left.svg'
 import { Preloader } from '../preloader/preloader';
+import { LinkComponent } from './../linkComponent/LinkComponent';
 
 export const VariableItem = () => {
   const { id } = useParams();
@@ -14,10 +15,10 @@ export const VariableItem = () => {
   const { Results } = useSelector(selectVariableItem);
   const { status } = useSelector(selectSearchResults);
 
-  const variableItem =
+  const variableItemInfo =
     Results &&
     Results.map((el, index) => {
-      return <li key={index}>{`${el.Id}. ${el.ElementName}: ${el.Name}`}</li>;
+      return <li key={index}><p>{`${el.Id}. ${el.ElementName}: ${el.Name}`}</p></li>;
     });
 
   const getVariable = async () => {
@@ -38,17 +39,17 @@ export const VariableItem = () => {
   if (status === "pending") {
     return <Preloader/>;
   }
-
+  console.log(variableItemInfo)
   return (
     <>
      <div className="">
-        <h3>Full variable info:</h3>
-        <div>
-          <img style={{ marginRight: "8px" }} src={arrowLeft} alt="arrowLeft" />
-          <Link to={`/variables`}>Back</Link>
-        </div>
+        <h4>Full variable info:</h4>
+        <LinkComponent text={'Back'} link={'/variables'} arrowDirection={'left'} img={arrowLeft}/>
      </div>
-      {variableItem && <ul>{variableItem}</ul>}
+      {variableItemInfo && variableItemInfo.length > 0 
+        ? <ul>{variableItemInfo}</ul>
+        : <p>No information about this variable...</p>
+      }
     </>
   );
 };
