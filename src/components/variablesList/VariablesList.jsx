@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux"
-import { Link } from "react-router-dom"
 import { selectSearchResults } from "../../store/search/searchSlice"
 import s from './variablesList.module.css'
 import arrowRight from "../../assets/arrow-right.svg";
 import { Preloader } from './../preloader/preloader';
+import { LinkComponent } from "../linkComponent/LinkComponent";
 
 
 const VariablesList = () => {
@@ -24,14 +24,12 @@ const VariablesList = () => {
             {list &&
                 <div className={s.results}>
                     <h3>Search results:</h3>
-                    <div className={s.link}>
-                        <Link to='/variables'>See all features</Link>
-                        <img
-                            style={{ marginLeft: "8px" }}
-                            src={arrowRight}
-                            alt="arrowRight"
-                        />
-                    </div>
+                    <LinkComponent 
+                        text={'See all features'} 
+                        link={'/variables'} 
+                        img={arrowRight}
+                        arrowDirection={'right'}
+                    />
                 </div>
             }
             <ul>{list}</ul>

@@ -114,6 +114,7 @@ h5 {
     text-transform: capitalize;
     text-decoration: none;
     letter-spacing: var(--letterSpacing);
+    color: var(--grey-800);
   }
   a,
   button {
@@ -135,6 +136,9 @@ h5 {
 
   span {
     font-weight: bold;
+  }
+  span a{
+    color: var(--primary-900);
   }
   .results-message {
    border: 0.5px solid var(--red-dark);

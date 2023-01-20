@@ -1,12 +1,9 @@
 .results {
     display: flex;
     justify-content: space-around;
-    align-items: end;
-}
-.link {
-    display: flex;
     align-items: baseline;
 }
+
 @media screen and (max-width: 520px) {
     .results {
         flex-direction: column;
