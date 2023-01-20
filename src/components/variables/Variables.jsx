@@ -24,19 +24,19 @@ export const Variables = () => {
     allVariables.map((el) => {
       return el.Results.map((el, index) => {
         return (
-          <p key={index}>
+          <li key={index}>
             <span>
               <Link to={`/variables/${el.ID}`}>{el.Name} : </Link>
             </span>
             {parse(el.Description)}
-          </p>
+          </li>
         );
       });
     });
-  console.log(allVariables);
 
   useEffect(() => {
     getAllVariabls();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (status === "pending") {

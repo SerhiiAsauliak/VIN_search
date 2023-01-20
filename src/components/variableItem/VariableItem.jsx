@@ -36,10 +36,10 @@ export const VariableItem = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  if (status === "pending") {
+  if (status === "fulfilled") {
     return <Preloader/>;
   }
-  console.log(variableItemInfo)
+
   return (
     <>
      <div className="">

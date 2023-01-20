@@ -3,7 +3,6 @@ import { selectSearchResults } from "./../../store/search/searchSlice";
 
 const Alert = () => {
   const { responseMessage } = useSelector(selectSearchResults);
-  console.log(responseMessage);
 
   return (
     <div
