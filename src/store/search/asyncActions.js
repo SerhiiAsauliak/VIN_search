@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { addRequestsToLocalStorage } from '../../components/utils';
+import { addRequestsToLocalStorage } from '../../utils';
 import { ALL_VARIABLE_URL, BASE_URL, VARIABLE_ITEM_URL } from '../../config';
 import { useHttp } from './../../hooks/useHttp';
 import { setRecentRequest } from './searchSlice';

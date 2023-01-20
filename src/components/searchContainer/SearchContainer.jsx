@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchVinData } from '../../store/search/asyncActions';
 import { selectSearchResults } from '../../store/search/searchSlice';
 import { useForm } from "react-hook-form";
+import s from './searchContainer.module.css'
 
 export const SearchContainer = () => {
   const dispatch = useDispatch()
@@ -21,14 +22,14 @@ export const SearchContainer = () => {
     setValue('search', e.target.innerHTML);
   }
 
-  const requestList = recentRequests.length > 0 && recentRequests.map(item => {
-    return <li onClick={(e) => onSetInputValue(e)}>{item}</li>
+  const requestList = recentRequests.length > 0 && recentRequests.map((item, index) => {
+    return <li key={index} onClick={(e) => onSetInputValue(e)}>{item}</li>
   })
   
   return (
-      <form onSubmit={handleSubmit(onSubmit)} className='form'>
+      <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
         <h4>Enter VIN code</h4>
-        <div className='form-center'>
+        <div className={s.formCenter}>
           <input {...register("search", { 
               required: "This field is required", 
               pattern: {
@@ -44,13 +45,13 @@ export const SearchContainer = () => {
                 message: 'Min length 17 symbols' 
               }})
             } 
-            className='form-input'
+            className={s.formInput}
             type='text'
           />
           {errors?.search && <p>{errors.search?.message}</p>}
           <button 
             type='submit'
-            className='btn btn-block'
+            className={`${s.btn} ${s.btnBlock}`}
           >
             Get Info
           </button>

@@ -1,0 +1,19 @@
+.header {
+    margin: 20px 0;
+}
+.headerTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+h1 {
+    font-size: 20px;
+}
+@media screen and (max-width: 760px) {
+    .logo {
+        display: none;
+    }
+    h1 {
+        font-size: 16px;
+    }
+}
