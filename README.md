@@ -1,3 +1,5 @@
+LINK TO DEPLOYING PROJECT: https://vin-search-d0kovec70-serhiiasauliak.vercel.app/
+
 ТЕСТОВОЕ ЗАДАНИЕ “VIN DECODER” 
 
 Перед нами стоит задача разработки веб-приложения для расшифровки автомобильных VIN-кодов и отображения полученных данных в удобном для восприятия виде. 
